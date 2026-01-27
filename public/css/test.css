@@ -1,0 +1,177 @@
+/* ===============================
+   MAIN CONTAINER
+================================ */
+
+/* test 페이지는 min-height 불필요 */
+.pageWrapper {
+    min-height: auto !important;
+}
+
+#mainContainer {
+    width: 100%;
+    height: 90vh; /* 화면 높이에 맞춰 축소 */
+    position: relative;
+    overflow: hidden;
+
+    /* 움직이는 그라데이션 배경 */
+    background: linear-gradient(
+        120deg,
+        #1d2671,
+        #c33764,
+        #1d2671
+    );
+    background-size: 300% 300%;
+    animation: gradientMove 18s ease infinite;
+    border-radius: 15px;
+        box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.20),
+        0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ===============================
+   오버레이
+================================ */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* ===============================
+   메인 텍스트
+================================ */
+.mainTextWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.mainText {
+    text-align: center;
+    color: white;
+}
+
+.mainText h1,
+.mainText h2,
+.mainText button {
+    opacity: 0;
+    animation: slideUp 0.9s ease-out forwards;
+}
+
+.delay1 {
+    animation-delay: 0.1s;
+}
+
+.delay2 {
+    animation-delay: 0.45s;
+}
+
+/* ===============================
+   선택 버튼 영역
+================================ */
+#buttons {
+    margin-top: 30px;
+}
+
+#buttons button {
+    padding: 14px 24px;
+    margin: 8px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#buttons button:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+/* 선택된 버튼 */
+#buttons button.selected {
+    background: #ffcf40;
+    color: #222;
+    border-color: #ffcf40;
+    font-weight: 700;
+    transform: scale(1.08);
+    box-shadow: 0 0 18px rgba(255, 207, 64, 0.8);
+}
+
+/* ===============================
+   다음 버튼
+================================ */
+#nextArea button {
+    margin-top: 25px;
+    padding: 14px 42px;
+    font-size: 16px;
+    border-radius: 999px;
+    border: none;
+    background: #ffffff;
+    color: #222;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#nextArea button:hover {
+    background: #ffcf40;
+}
+
+/* ===============================
+   애니메이션
+================================ */
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   모바일 대응
+================================ */
+@media (max-width: 768px) {
+    #mainContainer {
+        height: 60vh;
+        border-radius: 20px;
+    }
+    
+    .mainText h1 {
+        font-size: 1.2rem; /* 20px → 18px 더 축소 */
+        line-height: 1.4;
+    }
+
+    #buttons {
+        margin-top: 20px; /* 30px → 20px */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px; /* 버튼 간격 일정하게 */
+    }
+
+    #buttons button {
+        min-width: 75px; /* 80px → 75px */
+        padding: 10px 18px; /* 12px 20px → 10px 18px */
+        font-size: 14px; /* 15px → 14px */
+        margin: 0; /* gap으로 대체 */
+    }
+    
+    #nextArea button {
+        margin-top: 20px; /* 25px → 20px */
+        padding: 10px 32px; /* 12px 36px → 10px 32px */
+        font-size: 14px;
+    }
+}

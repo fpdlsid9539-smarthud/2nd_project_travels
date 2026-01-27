@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>여행지 탐색 중...</title>
+  <script src="//unpkg.com/globe.gl"></script>
+  <style>
+    body { margin: 0; background: #000; overflow: hidden; font-family: 'Pretendard', sans-serif; }
+    
+    .loading-container {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #main-msg { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; transition: all 0.3s; }
+    .status-text { font-size: 1.1rem; opacity: 0.7; letter-spacing: 5px; }
+
+    /* 타겟 고정 시 나타나는 링 (선택 사항) */
+    #target-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px; height: 100px;
+      border: 2px solid #00ff00;
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+      transition: all 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="target-ring"></div>
+
+  <div class="loading-container">
+    <h1 id="main-msg">전 세계 여행지 스캔 중</h1>
+    <div id="sub-msg" class="status-text">SCANNING...</div>
+  </div>
+
+  <div id="globeViz"></div>
+
+  <script>
+    const container = document.getElementById('globeViz');
+    
+    // 1. 지구본 설정
+    const world = Globe()(container)
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+      .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+      .showAtmosphere(true)
+      .atmosphereColor('#4aa8ff')
+      .atmosphereAltitude(0.2);
+
+    // 2. 초기 상태 (멀리서 시작)
+    world.pointOfView({ altitude: 8.0 }, 0); 
+    world.controls().autoRotate = true;
+    let currentSpeed = 2.0;
+    world.controls().autoRotateSpeed = currentSpeed;
+
+    const duration = 4000; // 총 4초
+    const startTime = Date.now();
+
+    // 3. 0~3초: 가속 회전 및 점진적 확대
+    function animate() {
+      const elapsed = Date.now() - startTime;
+      const progress = elapsed / duration;
+
+      if (progress < 0.75) { // 처음 3초 동안
+        // 회전 속도 급상승 (2.0 -> 60.0)
+        currentSpeed = 2.0 + (progress * 80.0);
+        world.controls().autoRotateSpeed = currentSpeed;
+        
+        // 고도 서서히 낮추기 (8.0 -> 3.0)
+        const currentAlt = 8.0 - (progress * 6.5);
+        world.pointOfView({ altitude: currentAlt }, 0);
+        
+        requestAnimationFrame(animate);
+      } else if (progress < 1.0) {
+        // 마지막 1초: 한국으로 타겟 고정!
+        if (world.controls().autoRotate) {
+          world.controls().autoRotate = false; // 자동 회전 중지
+          
+          // 한국 좌표(37, 127)로 카메라 급속 이동
+          world.pointOfView({
+            lat: 37,
+            lng: 127,
+            altitude: 1.5 // 가까이 확대
+          }, 1000); // 1000ms(1초) 동안 이동
+
+          // UI 변경
+          document.getElementById('main-msg').innerText = "목적지 발견!";
+          document.getElementById('main-msg').style.color = "#00ff00";
+          document.getElementById('target-ring').style.opacity = "1";
+          document.getElementById('target-ring').style.width = "300px";
+          document.getElementById('target-ring').style.height = "300px";
+        }
+        requestAnimationFrame(animate);
+      }
+    }
+    
+    animate();
+
+    // 4. 4초 후 페이지 이동
+    setTimeout(() => {
+      // 살짝 깜빡이는 연출 후 이동
+      document.body.style.backgroundColor = "white";
+      setTimeout(() => {
+        window.location.href = 'result.html';
+      }, 150);
+    }, duration);
+
+    window.addEventListener('resize', () => {
+      world.width(window.innerWidth);
+      world.height(window.innerHeight);
+    });
+  </script>
+</body>
+</html>

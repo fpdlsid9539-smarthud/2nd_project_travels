@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelectResult</title>
+    <link href="./css/pubHF.css" rel="stylesheet">
+    <link href="./css/public.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <link href="./css/result.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- header -->
+    <div id="header"></div>
+
+    <!-- main -->
+    <main>
+
+        <div class="pageWrapper">
+            <!-- 왼쪽 광고 -->
+           
+            
+            <!-- 메인 콘텐츠 -->
+            <div class="mainContent">
+                <div>
+                    <img class="img" src="https://www.visitbusan.net/uploadImgs/files/cntnts/20200101173014369" alt="이미지가 없습니다.">
+                </div>
+                <div id="resultCard">
+                    <p class="cityName">이번 랜덤 여행지는 바로 <strong>부산</strong>입니다.</p>
+                    <h2 id="resultTitle"></h2>
+                    <!-- 사용자 선택 태그 영역 -->
+                    <div id="tagContainer"></div>
+                </div>
+            </div>
+            
+           
+        </div>
+    </main>
+    
+    <!-- footer -->
+    <div id="footer"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>  
+    <script type="module" src="./js/result.js"></script>
+    <script src="./js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+.pageWrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.mainContent {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ✅ 전체 레이아웃 */
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  /* ✅ 페이지는 아래로 늘어나게(브라우저 y-scroll 사용) */
+  height: auto;
+  min-height: calc(100vh - 80px);
+  overflow: visible;
+}
+
+/* ✅ 상단: 지도 + 루트 (여기 크기를 고정/안정적으로 유지) */
+.top-section {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  /* ✅ 카드가 늘어나도 지도/루트 높이 안 줄어들게 */
+  height: clamp(520px, 62vh, 720px);  /* 예전 느낌 유지: 필요하면 수치만 조절 */
+  overflow: hidden;
+  min-height: 520px;
+}
+
+/* 지도 */
+.map-container {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* 루트 */
+.route-section {
+  width: 250px;
+  min-width: 250px;
+  flex-shrink: 0;
+  background: #fff;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.toolbar {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.toolbar button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #007aff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.toolbar button:disabled {
+  background: #ccc;
+  cursor: default;
+}
+
+.route-box {
+  padding: 12px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.route-box h3 {
+  margin: 0 0 8px;
+}
+
+#routeList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#routeList li {
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+#routeList .empty {
+  color: #999;
+}
+
+/* ✅ 하단 카드 영역: 고정 높이/내부 스크롤 제거, 페이지가 아래로 늘어나게 */
+.card-section {
+  height: auto;
+  overflow: visible;
+  border-top: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ✅ 카드 컨테이너: x-scroll 제거 + 5개씩 줄바꿈 */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)); /* ✅ 한 줄 5개 */
+  gap: 12px;
+  padding: 12px;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 카드 */
+.card {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 196px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card.selected {
+  border: 2px solid #007aff;
+  cursor: grab;
+}
+
+.card.selected:active {
+  cursor: grabbing;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-image {
+  position: relative;
+  height: 120px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 22px;
+  color: #ffcc00;
+  cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.card-body {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 지도 숫자 마커 */
+.number-marker {
+  background: #349266;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* 카드 내부 숫자 마커 */
+.card-image .number-marker {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+/* 선택된 루트 리스트 ★ */
+.route-star {
+  color: #ffcc00;
+  font-size: 14px;
+  margin-right: 6px;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.route-star:hover {
+  transform: scale(1.2);
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 1024px){
+  .card-container{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ===== 모바일 반응형 ===== */
+@media (max-width: 768px) {
+  /* 상단을 세로로 */
+  .top-section {
+    flex-direction: column;
+    height: auto;      /* 모바일은 카드와 같이 자연스러운 흐름이 더 좋음 */
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .map-container {
+    height: 400px;
+    width: 100%;
+    flex: none;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .route-section {
+    width: 100%;
+    min-width: 100%;
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+
+  .card-container{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card{ height: 160px; }
+  .card-image{ height: 100px; }
+}

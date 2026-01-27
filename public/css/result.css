@@ -1,0 +1,259 @@
+/* result 페이지는 min-height 불필요 */
+.pageWrapper {
+  min-height: auto !important;
+}
+
+/* 메인 이미지 */
+.img {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 15px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* 결과 카드 */
+#resultCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 40px;
+  margin: 30px auto 0;
+  max-width: 800px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+#resultBox {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.cityName {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cityName strong {
+  color: #667eea;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+#resultTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 태그 영역 */
+#tagContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.tagItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 24px 16px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.tagItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.tagCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  background: white;
+  color: #667eea;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+/* 장소 정보 영역 */
+#placeInfo {
+  padding: 20px 0;
+  text-align: center;
+}
+
+#placeInfo h3 {
+  color: #333;
+  font-size: 26px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.contentType {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.address {
+  color: #888;
+  font-size: 15px;
+  margin: 12px 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.address::before {
+  content: "📍";
+  margin-right: 5px;
+}
+
+.coords {
+  color: #999;
+  font-size: 13px;
+  margin: 8px 0 15px 0;
+  font-family: 'Courier New', monospace;
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.placeTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.placeTag {
+  background: white;
+  color: #667eea;
+  border: 1px solid #667eea;
+  padding: 6px 14px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.overview {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* 로딩/에러 메시지 */
+.loading, .error, .noResult {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading p {
+  font-size: 20px;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.error p, .noResult p {
+  font-size: 18px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.error button, .noResult button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.error button:hover, .noResult button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 이미지 아래 여백이 커 보이면 여기서 컨트롤 */
+  .img {
+    height: 250px;          /* 기존 250 → 살짝 줄여도 더 균형 좋아짐(원하면 250 유지 가능) */
+    border-radius: 10px;
+    margin-bottom: 12px;    /* ✅ 이미지와 카드 사이 간격 줄이기 */
+  }
+
+  /* 결과 카드가 이미지랑 너무 떨어져 보이는 핵심 */
+  #resultCard {
+    margin: 12px auto 0;    /* ✅ 기존 30px → 12px */
+    padding: 20px 18px;     /* ✅ 기존 25px → 더 타이트하게 */
+    border-radius: 14px;
+  }
+
+  /* 내부 요소들도 위아래 padding이 커서 "두 div 사이가 멀어" 보이게 만듦 */
+  #resultBox {
+    margin-bottom: 14px;    /* 기존 25px → 14px */
+  }
+
+  #tagContainer {
+    padding: 12px 0;        /* 기존 20px 0 → 12px 0 */
+    gap: 10px;              /* 12px → 10px */
+  }
+
+  /* 텍스트 공간도 조금만 줄이면 전체가 더 촘촘해짐 */
+  #resultTitle {
+    font-size: 22px;
+    margin-bottom: 12px;    /* 기존 20px → 12px */
+  }
+
+  #placeInfo {
+    padding: 12px 0;        /* 기존 20px 0 → 12px 0 */
+  }
+
+  .cityName strong {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}

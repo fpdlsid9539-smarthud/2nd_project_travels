@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link href="./css/pubHF.css" rel="stylesheet">
+    <link href="./css/public.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <link href="./css/test.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- header -->
+    <div id="header"></div>
+
+    <!-- main -->
+    <main>
+        <div class="pageWrapper">
+            <!-- 왼쪽 광고 -->
+            
+            <!-- 메인 콘텐츠 -->
+            <div class="mainContent">
+                <div id="mainContainer">
+                    <div class="overlay"></div>
+                    <div class="mainTextWrapper">
+                        <div class="mainText">
+                            <h1 id="question" class="delay1">누구와 여행을 떠나실 건가요?</h1>    
+                            <div id="buttons">
+                                <button data-value="friend" class="delay2">친구</button>
+                                <button data-value="family" class="delay2">가족</button>
+                                <button data-value="lover" class="delay2">연인</button>
+                            </div>                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </main>
+    
+    <!-- footer -->
+    <div id="footer"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
+    <script src="./js/test.js"></script> 
+    <script src="./js/common.js"></script>
+</body>
+</html>

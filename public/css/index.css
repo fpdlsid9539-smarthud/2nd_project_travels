@@ -1,0 +1,152 @@
+/* =========================
+   MAIN
+========================= */
+
+/* index 페이지는 min-height 불필요 */
+.pageWrapper {
+    min-height: auto !important;
+}
+
+#mainContainer{
+    width: 100%;
+    height: 90vh; /* 90vh → 70vh로 축소 */
+    position: relative;
+    overflow: hidden;
+
+    /* 메인 배경 그라디언트 */
+    background: linear-gradient(
+        120deg,
+        #43cea2,
+        #185a9d,
+        #fbc2eb,
+        #a6c1ee
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 18s ease infinite;
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.20),
+        0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 움직이는 점 패턴 */
+#mainContainer::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 2px, transparent 3px),
+        radial-gradient(circle at 80% 40%, rgba(255,255,255,0.1) 2px, transparent 3px),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.12) 2px, transparent 3px);
+    background-size: 200px 200px;
+    animation: floatDots 40s linear infinite;
+    z-index: 0;
+}
+
+/* 오버레이 */
+.overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+/* 텍스트 래퍼 */
+.mainTextWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    transition: transform 0.2s ease;
+}
+
+.mainText {
+    text-align: center;
+    color: white;
+}
+
+/* 등장 애니메이션 */
+.mainText h1,
+.mainText h2,
+.mainText button {
+    opacity: 0;
+    animation: slideUp 0.9s ease-out forwards;
+}
+
+.mainText h1 {
+    margin-bottom: 16px; /* h1 아래 여백 */
+}
+
+.mainText h2 {
+    margin-bottom: 32px; /* h2와 버튼 사이 여백 */
+}
+.delay1 {
+    animation-delay: 0.1s;
+}
+
+.delay2 {
+    animation-delay: 0.45s;
+    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: none;
+    background: white;
+    color: #222;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.delay2:hover {
+    background: #ff7a18;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* 애니메이션 */
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes gradientMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatDots {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-200px); }
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    #mainContainer {
+        height: 60vh; /* 모바일에서 더 축소 */
+        border-radius: 20px;
+    }
+    
+    /* ✅ 첫 줄: 살짝 작게 */
+  .mainText h1 {
+    font-size: 1.35rem; /* 기존 1.5rem -> 살짝 축소 */
+    line-height: 1.25;
+  }
+
+  .mainText h2 {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  /* ✅ 두 번째 줄에서 "럭키비키한 랜덤 투어"만 아래로 내리기 */
+  .mainText .h2-bottom {
+    display: block;
+    margin-top: 0.4rem;
+  }
+}
